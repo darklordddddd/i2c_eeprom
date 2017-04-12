@@ -1,0 +1,4 @@
+#!/bin/bash
+echo 0x37 > /sys/class/i2c-adapter/i2c-1/delete_device
+rmmod eeprom_master
+rm /dev/i2c_eepromcd

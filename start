@@ -1,0 +1,10 @@
+#!/bin/bash
+make
+modprobe i2c-stub chip_addr=0x37
+chmod 777 /sys/class/i2c-adapter/i2c-1/new_device
+chmod 777 /sys/class/i2c-adapter/i2c-1/delete_device
+insmod eeprom_master.ko
+i2cset -y 1 0x37 0x00 64
+echo my_eeprom 0x37 > /sys/class/i2c-adapter/i2c-1/new_device
+mknod /dev/i2c_eeprom c 246 0
+chmod 777 /dev/i2c_eeprom
